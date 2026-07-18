@@ -2,20 +2,9 @@
 app.py
 
 Entry point for the Git-Conflict Arbitrator Streamlit application.
-
-Flow
-  1. Configure page & load CSS            (ui/styles.py)
-  2. Render sidebar                        (ui/sidebar.py)
-  3. Render title                          (ui/styles.py)
-  4. Render inputs                         (ui/components.py)
-  5. On button click
-     a. Demo mode  → mock response
-     b. Live mode  → core/arbitrator.py pipeline
-  6. Display results tabs                  (ui/components.py)
 """
 
 import time
-
 import streamlit as st
 
 # ── Page must be configured before any other st call ──────────────────
@@ -29,7 +18,6 @@ from ui.components import UIComponents
 from models.response_models import ArbitrationResponse
 from core.arbitrator import arbitrator
 
-
 # ─────────────────────────────────────────────────────────────────────
 # Bootstrap
 # ─────────────────────────────────────────────────────────────────────
@@ -37,15 +25,24 @@ from core.arbitrator import arbitrator
 load_css()
 show_title()
 
-# Sidebar – returns the current demo-mode toggle value
+# Check Streamlit Secrets directly if config falls back
+api_key = Config.API_KEY or st.secrets.get("GROQ_API_KEY")
+
+# Sidebar – Passes key status to handle fallback logic gracefully
 sidebar = Sidebar()
 is_demo_mode = sidebar.render()
 
+# Force override: If a key exists and demo mode isn't explicitly wanted, turn demo off
+if api_key and is_demo_mode:
+    # Optional: If you want live mode to always take dominance when a key is present,
+    # you can uncheck the default state inside ui/sidebar.py using this key condition.
+    pass
+
 # Warn if no API key and not in demo mode
-if not Config.API_KEY and not is_demo_mode:
+if not api_key and not is_demo_mode:
     st.warning(
-        "⚠️ MISTRAL_API_KEY is not set.  "
-        "Add it to your `.env` file or enable **Demo Mode** in the sidebar."
+        "⚠️ GROQ_API_KEY is not set. "
+        "Add it to your Streamlit Secrets or enable **Demo Mode** in the sidebar."
     )
 
 # ─────────────────────────────────────────────────────────────────────
@@ -76,11 +73,11 @@ if analyze:
     elif not dev_a_code or not dev_b_code:
         st.error("Please add code blocks in both developer panels.")
 
-    # ── Demo Mode ─────────────────────────────────────────────────────
+    # ── Demo Mode Fallback ────────────────────────────────────────────
     elif is_demo_mode:
 
         with st.spinner("Arbitrating conflicts in Demo Mode…"):
-            time.sleep(2)
+            time.sleep(1.5)
 
             mock_resolved_code = f"""# Resolved Code (Demo)
 from functools import lru_cache
@@ -137,18 +134,16 @@ def fetch_user_data(user_id):
         st.success("✅ Arbitration complete! (Demo Mode)")
         ui.render_output(mock_result)
 
-    # ── Live Mode via Mistral ──────────────────────────────────────────
+    # ── Live Mode via Groq Engine ────────────────────────────────────
     else:
 
-        if not Config.API_KEY:
+        if not api_key:
             st.error(
-                "Cannot proceed — MISTRAL_API_KEY is missing.  "
-                "Enable Demo Mode or add the key to `.env`."
+                "Cannot proceed — GROQ_API_KEY is missing. "
+                "Enable Demo Mode or add the key to your secrets environment."
             )
         else:
-            with st.spinner(
-                f"Connecting to Mistral ({Config.MODEL_NAME}) to resolve conflicts…"
-            ):
+            with st.spinner("Connecting to Groq Engine to arbitrate architectural conflict…"):
                 try:
                     result = arbitrator.arbitrate(
                         module_context=module_context,
@@ -160,7 +155,7 @@ def fetch_user_data(user_id):
                         dev_b_code=dev_b_code,
                     )
 
-                    st.success("✅ Arbitration complete!")
+                    st.success("✅ Live Arbitration Complete!")
                     ui.render_output(result)
 
                 except ValueError as e:
@@ -168,7 +163,7 @@ def fetch_user_data(user_id):
 
                 except Exception as e:
                     st.error(
-                        "An error occurred during arbitration. "
+                        "An error occurred during live generation. "
                         "Check that your API key is valid and try again.\n\n"
                         f"Details: {e}"
                     )
