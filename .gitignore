@@ -1,0 +1,17 @@
+# --- Environment Variables & Secrets ---
+.env
+.env.*
+secrets.toml
+
+# --- Python Virtual Environments & Packages ---
+venv/
+.venv/
+env/
+*.pyc
+__pycache__/
+.pytest_cache/
+
+# --- Streamlit & Local App Artifacts ---
+.streamlit/config.toml
+.streamlit/secrets.toml
+*.log
