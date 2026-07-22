@@ -14,9 +14,7 @@ Software development teams using Git regularly face merge conflicts — situatio
 
 ---
 
-## Live Deployed URL
-
-(https://your-app-name.streamlit.app](https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/))](https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/)
+🚀 **Live Demo:** [Git Conflict Arbitrator](https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/)
 
 *(Replace this with your actual Streamlit Community Cloud URL once deployed)*
 
