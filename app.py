@@ -41,7 +41,7 @@ if api_key and is_demo_mode:
 # Warn if no API key and not in demo mode
 if not api_key and not is_demo_mode:
     st.warning(
-        "⚠️ GROQ_API_KEY is not set. "
+        "⚠️ MISTRAL_API_KEY is not set. "
         "Add it to your Streamlit Secrets or enable **Demo Mode** in the sidebar."
     )
 
@@ -143,7 +143,7 @@ def fetch_user_data(user_id):
                 "Enable Demo Mode or add the key to your secrets environment."
             )
         else:
-            with st.spinner("Connecting to Groq Engine to arbitrate architectural conflict…"):
+            with st.spinner("Connecting to MISTRAL Engine to arbitrate architectural conflict…"):
                 try:
                     result = arbitrator.arbitrate(
                         module_context=module_context,
