@@ -23,7 +23,7 @@ class Sidebar:
         Render the sidebar.
         """
 
-        st.sidebar.title("🛠️ Configuration")
+        st.sidebar.title(" Configuration")
 
         st.sidebar.markdown("---")
 
@@ -34,7 +34,7 @@ class Sidebar:
 
         st.sidebar.markdown("---")
 
-        st.sidebar.subheader("🤖 Model")
+        st.sidebar.subheader(" Model")
 
         st.sidebar.info(
             Config.MODEL_NAME
@@ -46,7 +46,7 @@ class Sidebar:
 
         st.sidebar.markdown("---")
 
-        st.sidebar.subheader("ℹ️ About")
+        st.sidebar.subheader("About")
 
         st.sidebar.caption(
             """
@@ -76,7 +76,7 @@ Git Conflict Arbitrator
 
     def _api_status(self):
 
-        st.sidebar.subheader("🔑 API Status")
+        st.sidebar.subheader(" API Status")
 
         if Config.API_KEY:
 
