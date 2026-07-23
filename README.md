@@ -100,17 +100,17 @@ async def get_user_data(user_id: str):
     return user
 ```
 
-## 📖 Motivation
+## Motivation
 
 While collaborating on a GitHub project, I encountered my first merge conflict after making improvements to an existing codebase. Although Git clearly showed where the conflict occurred, understanding how to combine two different implementations without breaking functionality was much more difficult than expected.
 
-Resolving the conflict manually took considerable time and required carefully understanding the purpose behind both versions of the code. That experience inspired the idea behind **Git-Conflict Arbitrator**—an AI-powered assistant that analyzes both developers' intentions instead of simply comparing text differences.
+Resolving the conflict manually took considerable time and required carefully understanding the purpose behind both versions of the code. That experience inspired the idea behind **Git-Conflict Arbitrator** an AI powered assistant that analyzes both developers intentions instead of simply comparing text differences.
 
 Rather than forcing developers to manually decide which code to keep, the application evaluates both implementations, understands the feature goals, and produces a unified, production-ready solution while explaining the reasoning behind every decision.
 
 ---
 
-# 🎯 The Problem It Solves
+# The Problem It Solves
 
 Merge conflicts are a normal part of collaborative software development, but resolving them correctly often requires understanding **why** each developer changed the code—not just **what** they changed.
 
@@ -137,27 +137,27 @@ The AI then generates:
 - ✅ Architectural recommendations
 - ✅ Security and design considerations
 
-Instead of replacing Git's merge system, the application acts as an intelligent decision-support layer that helps developers resolve conflicts faster and with greater confidence.
+Instead of replacing Git's merge system, the application acts as an intelligent decision support layer that helps developers resolve conflicts faster and with greater confidence.
 
 ---
 
-# ✨ Features
+# Features
 
-- 🤖 AI-powered merge conflict arbitration using **Mistral AI**
-- 🧠 Intent-aware conflict resolution instead of simple text comparison
-- 👥 Independent inputs for two developers
-- 📦 Project context support for improved AI reasoning
-- 📝 Production-ready merged code generation
-- 🔍 Detailed conflict analysis explaining the resolution process
-- 🏗 Architectural notes with design recommendations
-- 🧪 Demo Mode for testing without an API key
-- 🔐 Secure API key management using environment variables and Streamlit Secrets
-- ⚠️ Graceful error handling with user-friendly messages
-- 💻 Clean Streamlit interface with syntax-highlighted code output
+-  AI-powered merge conflict arbitration using **Mistral AI**
+-  Intent-aware conflict resolution instead of simple text comparison
+-  Independent inputs for two developers
+-  Project context support for improved AI reasoning
+-  Production ready merged code generation
+-  Detailed conflict analysis explaining the resolution process
+-  Architectural notes with design recommendations
+-  Demo Mode for testing without an API key
+-  Secure API key management using environment variables and Streamlit Secrets
+-  Graceful error handling with user-friendly messages
+-  Clean Streamlit interface with syntax-highlighted code output
 
 ---
 
-# 🏗 Architecture
+#  Architecture
 
 ```text
                  User Input
@@ -188,7 +188,7 @@ Resolved Code   Conflict Analysis   Architectural Notes
 
 ---
 
-# 📸 Screenshots
+#  Screenshots
 
 ### Input Layout
 
@@ -239,11 +239,11 @@ The application should generate:
 
 ---
 
-# 🤖 AI Implementation
+#  AI Implementation
 
 ## Overview
 
-The core intelligence of **Git-Conflict Arbitrator** is powered by **Mistral AI's `mistral-large-latest` model**. Instead of relying on traditional line-by-line merge algorithms, the application performs **intent-aware conflict resolution** by understanding what each developer is trying to accomplish before generating a unified implementation.
+The core intelligence of **Git-Conflict Arbitrator** is powered by **Mistral AI's `mistral-large-latest` model**. Instead of relying on traditional line by line merge algorithms, the application performs **intent-aware conflict resolution** by understanding what each developer is trying to accomplish before generating a unified implementation.
 
 The workflow is designed to preserve the objectives of both developers whenever possible while producing clean, maintainable, and production-ready code.
 
@@ -285,7 +285,7 @@ The arbitration pipeline follows these steps:
 
 ---
 
-# 📋 Structured Response Schema
+#  Structured Response Schema
 
 To ensure reliable and predictable responses, the model returns a structured JSON object validated using **Pydantic**.
 
@@ -306,7 +306,7 @@ class ArbitrationResponse(BaseModel):
 
 ---
 
-# 🧠 Prompt Engineering
+#  Prompt Engineering
 
 The application dynamically constructs a prompt that contains:
 
@@ -321,7 +321,7 @@ This allows the model to reason about **developer intent** rather than simply co
 
 ---
 
-# 📝 System Prompt
+#  System Prompt
 
 ```text
 You are an expert software architect and Git conflict resolution agent called the Git-Conflict Arbitrator.
@@ -383,7 +383,7 @@ Instructions:
 
 ---
 
-# 🛠 Technologies Used
+#  Technologies Used
 
 | Category | Technology |
 |-----------|------------|
@@ -397,28 +397,7 @@ Instructions:
 
 ---
 
-# 📁 Project Structure
-
-```text
-git-conflict-arbitrator/
-│
-├── app.py                 # Streamlit application
-├── prompt.py              # Prompt construction
-├── schemas.py             # Pydantic response models
-├── requirements.txt       # Project dependencies
-├── .env                   # Local API key (ignored)
-├── .gitignore
-├── README.md
-│
-└── assets/
-    └── screenshots/
-```
-
-> **Note:** The exact project structure may vary depending on future development, but the core architecture remains the same.
-
----
-
-# 🎯 Why Intent-Based Conflict Resolution?
+#  Why Intent Based Conflict Resolution?
 
 Traditional Git merge tools compare **code differences**.
 
@@ -445,7 +424,7 @@ without forcing developers to manually reconstruct the final implementation.
 
 ---
 
-# 🚀 Demo Mode
+#  Demo Mode
 
 The application includes a built-in **Demo Mode (Mock Simulation)**.
 
@@ -466,7 +445,7 @@ This feature is particularly useful for:
 
 ---
 
-# 🔒 Security Considerations
+#  Security Considerations
 
 To protect sensitive credentials, the application follows recommended security practices:
 
@@ -478,7 +457,7 @@ To protect sensitive credentials, the application follows recommended security p
 
 These practices help ensure that API credentials remain secure during both development and deployment.
 
-# 🚀 Getting Started
+#  Getting Started
 
 Follow these steps to run the project locally.
 
@@ -569,7 +548,7 @@ http://localhost:8501
 
 ---
 
-# 🎭 Running Without an API Key
+#  Running Without an API Key
 
 The project includes a **Demo Mode (Mock Simulation)** for users who do not have a Mistral API key.
 
@@ -592,7 +571,7 @@ This is especially useful for:
 
 ---
 
-# ☁️ Deployment
+#  Deployment
 
 The application is deployed using **Streamlit Community Cloud**.
 
@@ -630,7 +609,7 @@ Your application will become publicly available through a `.streamlit.app` URL.
 
 ---
 
-# 🌍 Live Demo
+#  Live Demo
 
 Try the deployed application here:
 
@@ -638,7 +617,7 @@ https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/
 
 ---
 
-# 📌 Important Notes
+#  Important Notes
 
 Before running or deploying the application, keep the following recommendations in mind:
 
@@ -652,7 +631,7 @@ Before running or deploying the application, keep the following recommendations 
 
 ---
 
-# 🎯 Future Improvements
+# Future Improvements
 
 This project establishes a foundation for AI-assisted merge conflict resolution. Several enhancements can further improve its capabilities:
 
@@ -690,7 +669,7 @@ This project establishes a foundation for AI-assisted merge conflict resolution.
 
 ---
 
-# 🤝 Contributing
+#  Contributing
 
 Contributions are welcome!
 
@@ -706,7 +685,7 @@ Constructive feedback and suggestions are always appreciated.
 
 ---
 
-# 📚 Technologies
+# Technologies
 
 - Python
 - Streamlit
@@ -716,7 +695,7 @@ Constructive feedback and suggestions are always appreciated.
 
 ---
 
-# 🙏 Acknowledgements
+# Acknowledgements
 
 Special thanks to:
 
@@ -726,7 +705,7 @@ Special thanks to:
 
 ---
 
-# 📄 License
+# License
 
 This project is licensed under the **MIT License**.
 
@@ -734,7 +713,7 @@ You are free to use, modify, and distribute this project in accordance with the 
 
 ---
 
-# 👨‍💻 Author
+# Author
 
 **Shaheer**
 
@@ -743,17 +722,15 @@ https://github.com/ShaheerS171
 
 ---
 
-## ⭐ Support the Project
+##  Support the Project
 
 If you found this project useful or interesting:
 
-⭐ Star the repository
+ Report bugs
 
-🐛 Report bugs
+ Suggest new features
 
-💡 Suggest new features
-
-🤝 Contribute to the project
+ Contribute to the project
 
 Your support helps improve the project and encourages future development.
 
@@ -763,4 +740,3 @@ Your support helps improve the project and encourages future development.
 
 Thank you for checking out **Git-Conflict Arbitrator**.
 
-If this project helped you or inspired you, consider giving it a ⭐ on GitHub!
