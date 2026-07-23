@@ -12,6 +12,94 @@ https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/
 
 ---
 
+# 🧪 Quick Test Case
+
+Want to test the application immediately?
+
+Copy the following values into the interface.
+
+---
+
+## Project Context / Module
+
+```text
+Python FastAPI user services module
+```
+
+---
+
+## Developer A
+
+**Developer Name**
+
+```text
+Shaheer
+```
+
+**Feature Intent / Goal**
+
+```text
+Add caching to improve performance.
+```
+
+**Conflicting Code**
+
+```python
+@app.get("/users/{user_id}")
+async def get_user_data(user_id: str):
+    # Check cache first to optimize response time
+    cached_data = await redis_client.get(f"user:{user_id}")
+    if cached_data:
+        return json.loads(cached_data)
+
+    user = await db.fetch_user_by_id(user_id)
+
+    # Store result in cache for 1 hour
+    await redis_client.setex(f"user:{user_id}", 3600, json.dumps(user))
+
+    return user
+```
+
+---
+
+## Developer B
+
+**Developer Name**
+
+```text
+Your Name
+```
+
+**Feature Intent / Goal**
+
+```text
+Add validation before returning data.
+```
+
+**Conflicting Code**
+
+```python
+@app.get("/users/{user_id}")
+async def get_user_data(user_id: str):
+    # Validate user ID length and alphanumeric format
+    if not user_id.isalnum() or len(user_id) != 8:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid User ID format"
+        )
+
+    user = await db.fetch_user_by_id(user_id)
+
+    # Validate user existence
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    return user
+```
+
 ## 📖 Motivation
 
 While collaborating on a GitHub project, I encountered my first merge conflict after making improvements to an existing codebase. Although Git clearly showed where the conflict occurred, understanding how to combine two different implementations without breaking functionality was much more difficult than expected.
@@ -137,94 +225,6 @@ Resolved Code   Conflict Analysis   Architectural Notes
 <img width="1401" height="645" alt="image" src="https://github.com/user-attachments/assets/2e25c299-edcc-4b7c-a0bc-94129e183eb9" />
 
 ---
-
-# 🧪 Quick Test Case
-
-Want to test the application immediately?
-
-Copy the following values into the interface.
-
----
-
-## Project Context / Module
-
-```text
-Python FastAPI user services module
-```
-
----
-
-## Developer A
-
-**Developer Name**
-
-```text
-Shaheer
-```
-
-**Feature Intent / Goal**
-
-```text
-Add caching to improve performance.
-```
-
-**Conflicting Code**
-
-```python
-@app.get("/users/{user_id}")
-async def get_user_data(user_id: str):
-    # Check cache first to optimize response time
-    cached_data = await redis_client.get(f"user:{user_id}")
-    if cached_data:
-        return json.loads(cached_data)
-
-    user = await db.fetch_user_by_id(user_id)
-
-    # Store result in cache for 1 hour
-    await redis_client.setex(f"user:{user_id}", 3600, json.dumps(user))
-
-    return user
-```
-
----
-
-## Developer B
-
-**Developer Name**
-
-```text
-Your Name
-```
-
-**Feature Intent / Goal**
-
-```text
-Add validation before returning data.
-```
-
-**Conflicting Code**
-
-```python
-@app.get("/users/{user_id}")
-async def get_user_data(user_id: str):
-    # Validate user ID length and alphanumeric format
-    if not user_id.isalnum() or len(user_id) != 8:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid User ID format"
-        )
-
-    user = await db.fetch_user_by_id(user_id)
-
-    # Validate user existence
-    if not user:
-        raise HTTPException(
-            status_code=404,
-            detail="User not found"
-        )
-
-    return user
-```
 
 ---
 
