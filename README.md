@@ -6,9 +6,15 @@ A production-ready Streamlit application that uses Mistral AI to automatically r
 
 ---
 
+## Motivation
+
+So I got this idea when I was working on a project on github with one of my friends. This was our unified project. I made some changes in the project files to improve the code and when i tried to merge the code with the main branch I got the merge conflict. This was my first time working with anyone so I tried to solve it on my own but the whole code got messed up and it took me alot of time to resolve it. Thats when i got the idea to make this project that will automatically give you the code to solve the merge conflict on your project saving you alot of time even if you dont know whats happening in your friends code.
+
+---
+
 ## The Problem It Solves
 
-Software development teams using Git regularly face merge conflicts — situations where two developers modify the same function or file with different goals in mind. Manually resolving these conflicts requires deep context about what each developer intended, which takes time and leads to mistakes when done under pressure.
+Software development teams using Git regularly face merge conflicts situations where two developers modify the same function or file with different goals in mind. Manually resolving these conflicts requires deep context about what each developer intended, which takes time and leads to mistakes when done under pressure.
 
 **Git-Conflict Arbitrator** is built for software development teams who want an AI-assisted decision layer on top of their Git workflow. Instead of manually re-reading both branches and guessing at a merge strategy, developers paste their conflicting versions and intent descriptions into the tool and receive a merged, architecturally sound code block alongside a conflict breakdown and engineering notes.
 
