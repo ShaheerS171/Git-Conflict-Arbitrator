@@ -1,183 +1,766 @@
 # Git-Conflict Arbitrator
 
-**The Team Collaboration Shield**
-
-A production-ready Streamlit application that uses Mistral AI to automatically resolve conflicting code implementations from two developers by analyzing their stated intent and generating a single, unified, production-quality code block.
-
----
-
-## Motivation
-
-So I got this idea when I was working on a project on github with one of my friends. This was our unified project. I made some changes in the project files to improve the code and when i tried to merge the code with the main branch I got the merge conflict. This was my first time working with anyone so I tried to solve it on my own but the whole code got messed up and it took me alot of time to resolve it. Thats when i got the idea to make this project that will automatically give you the code to solve the merge conflict on your project saving you alot of time even if you dont know whats happening in your friends code.
+> **The Team Collaboration Shield**  
+> AI-powered Git merge conflict resolution using **Mistral AI**. Analyze conflicting implementations, understand each developer's intent, and generate a single production-ready solution with detailed conflict analysis and architectural recommendations.
 
 ---
 
-## The Problem It Solves
+## 🌐 Live Demo
 
-Software development teams using Git regularly face merge conflicts situations where two developers modify the same function or file with different goals in mind. Manually resolving these conflicts requires deep context about what each developer intended, which takes time and leads to mistakes when done under pressure.
-
-**Git-Conflict Arbitrator** is built for software development teams who want an AI-assisted decision layer on top of their Git workflow. Instead of manually re-reading both branches and guessing at a merge strategy, developers paste their conflicting versions and intent descriptions into the tool and receive a merged, architecturally sound code block alongside a conflict breakdown and engineering notes.
-
----
-
-🚀 **Live Demo:** [Git Conflict Arbitrator](https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/)
-
-
+🚀 **Try it here:**  
+https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/
 
 ---
 
-## Features
+## 📖 Motivation
 
-- **Side-by-side conflict input**: Two-column layout allows Developer A and Developer B to each provide their name, feature intent, and conflicting code block independently.
-- **Project module context input**: A full-width text field at the top specifies the language or module being worked on (e.g., "Python FastAPI user services module") to give the AI grounding.
-- **AI-powered conflict arbitration**: Sends both developer inputs and intents to Mistral AI's `mistral-large-latest` model and receives a structured JSON response containing the merged resolution.
-- **Structured output display**: The resolved code block is rendered with syntax highlighting. Conflict Analysis and Architectural Notes are displayed in styled side-by-side callout panels beneath it.
-- **Demo Mode (Mock Simulation)**: A sidebar toggle that bypasses the API entirely and returns a predefined mock response. This allows the app to be fully demonstrated without an active API key.
-- **Safe API key handling**: The app checks for the key in environment variables and Streamlit secrets — never hardcoded in source.
-- **Graceful error handling**: All API and parsing failures are caught and displayed as readable user-facing messages with no raw tracebacks exposed.
+While collaborating on a GitHub project, I encountered my first merge conflict after making improvements to an existing codebase. Although Git clearly showed where the conflict occurred, understanding how to combine two different implementations without breaking functionality was much more difficult than expected.
+
+Resolving the conflict manually took considerable time and required carefully understanding the purpose behind both versions of the code. That experience inspired the idea behind **Git-Conflict Arbitrator**—an AI-powered assistant that analyzes both developers' intentions instead of simply comparing text differences.
+
+Rather than forcing developers to manually decide which code to keep, the application evaluates both implementations, understands the feature goals, and produces a unified, production-ready solution while explaining the reasoning behind every decision.
 
 ---
 
-## AI Feature
+# 🎯 The Problem It Solves
 
-**What it does:**
+Merge conflicts are a normal part of collaborative software development, but resolving them correctly often requires understanding **why** each developer changed the code—not just **what** they changed.
 
-The AI feature takes the two conflicting code blocks and the stated intent of each developer, constructs a detailed arbitration prompt, and calls Mistral AI to return a three-part structured JSON response.
+Traditional merge tools compare files line by line, leaving developers to manually determine:
 
-**Model used:** `mistral-large-latest` via the Mistral AI API
+- Which implementation should be preserved.
+- Which logic should be combined.
+- Whether either implementation introduces bugs or security risks.
+- How both features can coexist without breaking the application.
 
-**Structured output schema (Pydantic):**
+This process becomes increasingly difficult when developers are working on the same function with completely different objectives.
+
+**Git-Conflict Arbitrator** addresses this challenge by using a Large Language Model to analyze:
+
+- The project context
+- Developer A's feature intent
+- Developer B's feature intent
+- Both conflicting code implementations
+
+The AI then generates:
+
+- ✅ A production-ready merged implementation
+- ✅ A detailed conflict analysis
+- ✅ Architectural recommendations
+- ✅ Security and design considerations
+
+Instead of replacing Git's merge system, the application acts as an intelligent decision-support layer that helps developers resolve conflicts faster and with greater confidence.
+
+---
+
+# ✨ Features
+
+- 🤖 AI-powered merge conflict arbitration using **Mistral AI**
+- 🧠 Intent-aware conflict resolution instead of simple text comparison
+- 👥 Independent inputs for two developers
+- 📦 Project context support for improved AI reasoning
+- 📝 Production-ready merged code generation
+- 🔍 Detailed conflict analysis explaining the resolution process
+- 🏗 Architectural notes with design recommendations
+- 🧪 Demo Mode for testing without an API key
+- 🔐 Secure API key management using environment variables and Streamlit Secrets
+- ⚠️ Graceful error handling with user-friendly messages
+- 💻 Clean Streamlit interface with syntax-highlighted code output
+
+---
+
+# 🏗 Architecture
+
+```text
+                 User Input
+                      │
+      ┌───────────────┴───────────────┐
+      │                               │
+Developer A                     Developer B
+Intent + Code                 Intent + Code
+      │                               │
+      └───────────────┬───────────────┘
+                      │
+              Project Context
+                      │
+                      ▼
+             Prompt Construction
+                      │
+                      ▼
+             Mistral Large Model
+                      │
+                      ▼
+        Structured JSON (Pydantic)
+                      │
+        ┌─────────────┼─────────────┐
+        │             │             │
+        ▼             ▼             ▼
+Resolved Code   Conflict Analysis   Architectural Notes
+```
+
+---
+
+# 📸 Screenshots
+
+### Input Layout
+
+<img width="1433" height="774" alt="image" src="https://github.com/user-attachments/assets/876542fc-7bcd-4d7a-a954-f0ce733c72f6" />
+
+---
+
+### Resolved Output
+
+<img width="1385" height="853" alt="image" src="https://github.com/user-attachments/assets/bd2e7542-6851-4355-ab54-b672d9c89727" />
+
+---
+
+### Conflict Analysis
+
+<img width="1371" height="734" alt="image" src="https://github.com/user-attachments/assets/b5362f2b-137b-41e5-959a-3325979d7a0f" />
+
+---
+
+### Security Analysis
+
+<img width="1422" height="716" alt="image" src="https://github.com/user-attachments/assets/31aedd62-65af-40cb-93a0-547e00e5526e" />
+
+---
+
+### Risk Analysis
+
+<img width="1441" height="702" alt="image" src="https://github.com/user-attachments/assets/80ab1dc8-7c6f-492b-a8c7-da4576975551" />
+
+---
+
+### Architectural Notes
+
+<img width="1401" height="645" alt="image" src="https://github.com/user-attachments/assets/2e25c299-edcc-4b7c-a0bc-94129e183eb9" />
+
+---
+
+# 🧪 Quick Test Case
+
+Want to test the application immediately?
+
+Copy the following values into the interface.
+
+---
+
+## Project Context / Module
+
+```text
+Python FastAPI user services module
+```
+
+---
+
+## Developer A
+
+**Developer Name**
+
+```text
+Shaheer
+```
+
+**Feature Intent / Goal**
+
+```text
+Add caching to improve performance.
+```
+
+**Conflicting Code**
+
+```python
+@app.get("/users/{user_id}")
+async def get_user_data(user_id: str):
+    # Check cache first to optimize response time
+    cached_data = await redis_client.get(f"user:{user_id}")
+    if cached_data:
+        return json.loads(cached_data)
+
+    user = await db.fetch_user_by_id(user_id)
+
+    # Store result in cache for 1 hour
+    await redis_client.setex(f"user:{user_id}", 3600, json.dumps(user))
+
+    return user
+```
+
+---
+
+## Developer B
+
+**Developer Name**
+
+```text
+Your Name
+```
+
+**Feature Intent / Goal**
+
+```text
+Add validation before returning data.
+```
+
+**Conflicting Code**
+
+```python
+@app.get("/users/{user_id}")
+async def get_user_data(user_id: str):
+    # Validate user ID length and alphanumeric format
+    if not user_id.isalnum() or len(user_id) != 8:
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid User ID format"
+        )
+
+    user = await db.fetch_user_by_id(user_id)
+
+    # Validate user existence
+    if not user:
+        raise HTTPException(
+            status_code=404,
+            detail="User not found"
+        )
+
+    return user
+```
+
+---
+
+**Expected Result**
+
+The application should generate:
+
+- ✅ A merged production-ready implementation
+- ✅ Conflict analysis
+- ✅ Architectural recommendations
+- ✅ Security and performance considerations
+
+---
+
+# 🤖 AI Implementation
+
+## Overview
+
+The core intelligence of **Git-Conflict Arbitrator** is powered by **Mistral AI's `mistral-large-latest` model**. Instead of relying on traditional line-by-line merge algorithms, the application performs **intent-aware conflict resolution** by understanding what each developer is trying to accomplish before generating a unified implementation.
+
+The workflow is designed to preserve the objectives of both developers whenever possible while producing clean, maintainable, and production-ready code.
+
+---
+
+## How It Works
+
+The arbitration pipeline follows these steps:
+
+1. The user provides the project or module context.
+2. Developer A enters:
+   - Name
+   - Feature intent
+   - Conflicting code
+3. Developer B enters:
+   - Name
+   - Feature intent
+   - Conflicting code
+4. The application constructs a structured prompt containing all developer information.
+5. The prompt is sent to **Mistral AI**.
+6. The model analyzes both implementations and their intended goals.
+7. The response is validated using a **Pydantic schema**.
+8. The application displays:
+   - Production-ready merged code
+   - Conflict analysis
+   - Architectural recommendations
+
+---
+
+## AI Model
+
+| Property | Value |
+|----------|-------|
+| Provider | Mistral AI |
+| Model | `mistral-large-latest` |
+| Framework | Streamlit |
+| Response Format | Structured JSON |
+| Validation | Pydantic v2 |
+
+---
+
+# 📋 Structured Response Schema
+
+To ensure reliable and predictable responses, the model returns a structured JSON object validated using **Pydantic**.
 
 ```python
 class ArbitrationResponse(BaseModel):
-    conflict_analysis: str   # Why the conflict happened and how it was resolved
-    resolved_code: str       # The merged, production-ready code block
-    architectural_notes: str # Design decisions, warnings, recommendations
+    conflict_analysis: str
+    resolved_code: str
+    architectural_notes: str
 ```
 
-**System prompt sent to the model:**
+### Response Fields
 
-```
-You are an expert software architect and git conflict resolution agent called the Git-Conflict Arbitrator.
+| Field | Description |
+|--------|-------------|
+| **conflict_analysis** | Explains why the conflict occurred, summarizes each developer's intent, and describes how the conflict was resolved. |
+| **resolved_code** | A complete, production-ready implementation that combines both developers' features. |
+| **architectural_notes** | Design considerations, recommendations, performance observations, and potential security concerns. |
+
+---
+
+# 🧠 Prompt Engineering
+
+The application dynamically constructs a prompt that contains:
+
+- Project context
+- Programming language or module
+- Developer A's information
+- Developer B's information
+- Both conflicting implementations
+- Detailed instructions for producing structured output
+
+This allows the model to reason about **developer intent** rather than simply comparing text differences.
+
+---
+
+# 📝 System Prompt
+
+```text
+You are an expert software architect and Git conflict resolution agent called the Git-Conflict Arbitrator.
+
 Analyze the following conflicting feature intents and code implementations for a project module having this context:
-Project Context/Language: {module_context}
 
-Developer A: {dev_a_name}
-Feature Intent: {dev_a_intent}
+Project Context/Language:
+{module_context}
+
+Developer A:
+{dev_a_name}
+
+Feature Intent:
+{dev_a_intent}
+
 Conflicting Code Block:
 {dev_a_code}
 
-Developer B: {dev_b_name}
-Feature Intent: {dev_b_intent}
+Developer B:
+{dev_b_name}
+
+Feature Intent:
+{dev_b_intent}
+
 Conflicting Code Block:
 {dev_b_code}
 
 Please resolve the conflict by providing:
-1. conflict_analysis: A detailed breakdown of why the conflict happened, what each developer intended,
-   and how the conflict is resolved by combining both intents.
-2. resolved_code: A production-ready, clean, single, and complete unified code block that successfully
-   integrates the features of Developer A and Developer B without duplication, including comments
-   explaining the changes.
-3. architectural_notes: Important design decisions, potential security warnings, performance
-   considerations, or follow-up recommendations.
+
+1. conflict_analysis
+A detailed breakdown explaining:
+- Why the conflict happened
+- What each developer intended
+- How both implementations were combined
+
+2. resolved_code
+Generate a clean, production-ready implementation that:
+- Integrates both feature sets
+- Avoids duplicated logic
+- Includes helpful comments where appropriate
+- Produces a complete solution
+
+3. architectural_notes
+Include:
+- Design decisions
+- Performance observations
+- Security considerations
+- Potential risks
+- Future recommendations
 
 Instructions:
-- Do not output any markdown code blocks inside the json fields.
-- If the inputs are invalid or not software code, return appropriate analytical errors in the json format.
-- Ensure the resolved code is complete, correct, and compiles/runs.
+
+- Return valid JSON only.
+- Do not wrap code inside markdown blocks.
+- If the supplied input is invalid or not software code,
+  return analytical errors using the same JSON schema.
+- Ensure the merged implementation is complete and executable.
 ```
 
 ---
 
-## Tools, Services, and Models Used
+# 🛠 Technologies Used
 
-| Category | Tool / Service |
-|---|---|
-| Language | Python 3.10+ |
-| Web Framework | Streamlit |
+| Category | Technology |
+|-----------|------------|
+| Programming Language | Python 3.10+ |
+| Frontend Framework | Streamlit |
 | AI Provider | Mistral AI |
-| AI Model | mistral-large-latest |
-| Response Schema | Pydantic v2 |
-| Environment Config | python-dotenv |
+| AI Model | `mistral-large-latest` |
+| Data Validation | Pydantic v2 |
+| Environment Management | python-dotenv |
 | Deployment | Streamlit Community Cloud |
 
 ---
 
-## Screenshots
+# 📁 Project Structure
 
-*(Add 3 or more screenshots of your running app here after deployment)*
-
-Example:
+```text
+git-conflict-arbitrator/
+│
+├── app.py                 # Streamlit application
+├── prompt.py              # Prompt construction
+├── schemas.py             # Pydantic response models
+├── requirements.txt       # Project dependencies
+├── .env                   # Local API key (ignored)
+├── .gitignore
+├── README.md
+│
+└── assets/
+    └── screenshots/
 ```
-![Input layout showing Developer A and Developer B columns](screenshots/input_view.png)
-![Demo mode output showing resolved code block](screenshots/output_code.png)
-![Conflict analysis and architectural notes panels](screenshots/output_details.png)
+
+> **Note:** The exact project structure may vary depending on future development, but the core architecture remains the same.
+
+---
+
+# 🎯 Why Intent-Based Conflict Resolution?
+
+Traditional Git merge tools compare **code differences**.
+
+Git-Conflict Arbitrator compares **developer intentions**.
+
+Instead of asking:
+
+> "Which lines changed?"
+
+the AI asks:
+
+> "What was each developer trying to accomplish?"
+
+This enables the application to intelligently combine complementary features such as:
+
+- Performance optimizations
+- Input validation
+- Security enhancements
+- Error handling
+- Logging
+- Refactoring
+
+without forcing developers to manually reconstruct the final implementation.
+
+---
+
+# 🚀 Demo Mode
+
+The application includes a built-in **Demo Mode (Mock Simulation)**.
+
+When enabled:
+
+- No API key is required.
+- No requests are sent to Mistral AI.
+- The application returns predefined sample results.
+- The complete interface can be demonstrated offline.
+
+This feature is particularly useful for:
+
+- Project demonstrations
+- Portfolio presentations
+- Academic evaluations
+- Testing the user interface
+- Exploring the application's workflow without consuming API credits
+
+---
+
+# 🔒 Security Considerations
+
+To protect sensitive credentials, the application follows recommended security practices:
+
+- API keys are never hardcoded into the source code.
+- Credentials are loaded using environment variables.
+- Streamlit Secrets are supported for deployment.
+- `.env` files are excluded using `.gitignore`.
+- Errors are handled gracefully without exposing sensitive information.
+
+These practices help ensure that API credentials remain secure during both development and deployment.
+
+# 🚀 Getting Started
+
+Follow these steps to run the project locally.
+
+---
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/ShaheerS171/git-conflict-arbitrator.git
+cd git-conflict-arbitrator
 ```
 
 ---
 
-## How to Run the Project
+## 2. Create a Virtual Environment
 
-### 1. Clone the Repository
-
-```bash
-git clone https://github.com/<your-username>/git-conflict-arbitrator.git
-cd git-conflict-arbitrator
-```
-
-### 2. Set Up a Virtual Environment and Install Dependencies
+### Linux / macOS
 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
+```
+
+### Windows
+
+```bash
+python -m venv venv
+venv\Scripts\activate
+```
+
+---
+
+## 3. Install Dependencies
+
+Upgrade pip (recommended):
+
+```bash
 pip install --upgrade pip
+```
+
+Install the required packages:
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 3. Configure Your API Key
+---
 
-Create a `.env` file in the project root:
+## 4. Configure Your API Key
+
+Create a `.env` file in the project root.
+
+### Linux / macOS
 
 ```bash
 touch .env
 ```
 
-Add your Mistral API key (get one at [console.mistral.ai](https://console.mistral.ai)):
+### Windows
+
+```cmd
+type nul > .env
+```
+
+Add your Mistral API key:
 
 ```env
 MISTRAL_API_KEY="your_actual_mistral_api_key"
 ```
 
-### 4. Run the App
+You can obtain an API key from:
+
+https://console.mistral.ai
+
+---
+
+## 5. Run the Application
 
 ```bash
 streamlit run app.py
 ```
 
-The app will open at `http://localhost:8501`.
+The application will start locally and open in your browser at:
 
-### Running Without an API Key (Demo Mode)
-
-If you do not have a Mistral API key, enable the **Demo Mode (Mock Simulation)** toggle in the left sidebar. The app will simulate a complete arbitration response using predefined mock data, allowing full demonstration of the interface without any API calls.
+```
+http://localhost:8501
+```
 
 ---
 
-## Deployment on Streamlit Community Cloud
+# 🎭 Running Without an API Key
 
-1. Push this repository to a public GitHub repository.
-2. Sign in to [Streamlit Community Cloud](https://share.streamlit.io).
-3. Click **New app**, connect your GitHub repository, and set the main file to `app.py`.
-4. Go to **App Settings > Secrets** and add:
+The project includes a **Demo Mode (Mock Simulation)** for users who do not have a Mistral API key.
+
+Simply enable the **Demo Mode** toggle from the left sidebar.
+
+Demo Mode allows you to:
+
+- Explore the complete interface
+- Generate sample conflict resolutions
+- View architectural recommendations
+- Test the application's workflow
+- Demonstrate the project without making API requests
+
+This is especially useful for:
+
+- Academic evaluations
+- Portfolio demonstrations
+- Recruiter presentations
+- Offline testing
+
+---
+
+# ☁️ Deployment
+
+The application is deployed using **Streamlit Community Cloud**.
+
+### Deployment Steps
+
+1. Push the repository to GitHub.
+
+2. Sign in to:
+
+https://share.streamlit.io
+
+3. Create a new application.
+
+4. Connect your GitHub repository.
+
+5. Select:
+
+```
+app.py
+```
+
+as the main application file.
+
+6. Open **App Settings → Secrets**
+
+Add:
 
 ```toml
 MISTRAL_API_KEY = "your_actual_mistral_api_key"
 ```
 
-5. Click **Deploy**. The app will be available at a public `.streamlit.app` URL.
+7. Click **Deploy**.
+
+Your application will become publicly available through a `.streamlit.app` URL.
 
 ---
 
-## Important Notes
+# 🌍 Live Demo
 
-- Never commit your `.env` file or API keys to the repository. The `.env` file is listed in `.gitignore`.
-- The repository must be set to **Public** on GitHub before submitting. Verify this by opening the repo link in a private/incognito browser window.
+Try the deployed application here:
+
+https://shaheers171-git-conflict-arbitrator-app-515lqb.streamlit.app/
+
+---
+
+# 📌 Important Notes
+
+Before running or deploying the application, keep the following recommendations in mind:
+
+- Never commit your `.env` file.
+- Never expose your API key publicly.
+- Ensure `.env` is included in `.gitignore`.
+- Use Streamlit Secrets for cloud deployments.
+- Keep dependencies updated.
+- Verify that your GitHub repository is set to **Public** before sharing it.
+- Test using Demo Mode if you do not have an API key.
+
+---
+
+# 🎯 Future Improvements
+
+This project establishes a foundation for AI-assisted merge conflict resolution. Several enhancements can further improve its capabilities:
+
+### Git Integration
+
+- Automatic Git merge conflict detection
+- Support for multi-file conflicts
+- Git patch generation
+- Automatic commit suggestions
+
+### AI Improvements
+
+- Support for multiple LLM providers
+- Local LLM inference
+- Model selection inside the UI
+- Better architectural reasoning
+- Repository-aware conflict analysis
+
+### Developer Experience
+
+- VS Code extension
+- GitHub Pull Request integration
+- GitHub Actions workflow
+- REST API version
+- Docker deployment
+- User authentication
+
+### UI Improvements
+
+- Dark/Light theme switching
+- Conflict visualization
+- Side-by-side diff viewer
+- Download merged code
+- Export reports as PDF
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+If you have ideas for new features, performance improvements, or bug fixes, feel free to:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push your branch
+5. Open a Pull Request
+
+Constructive feedback and suggestions are always appreciated.
+
+---
+
+# 📚 Technologies
+
+- Python
+- Streamlit
+- Mistral AI
+- Pydantic
+- python-dotenv
+
+---
+
+# 🙏 Acknowledgements
+
+Special thanks to:
+
+- **Mistral AI** for providing the language model powering the arbitration engine.
+- **Streamlit** for enabling rapid development of interactive AI applications.
+- The open-source community for continuously inspiring better software engineering practices.
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+You are free to use, modify, and distribute this project in accordance with the terms of the license.
+
+---
+
+# 👨‍💻 Author
+
+**Shaheer**
+
+GitHub:
+https://github.com/ShaheerS171
+
+---
+
+## ⭐ Support the Project
+
+If you found this project useful or interesting:
+
+⭐ Star the repository
+
+🐛 Report bugs
+
+💡 Suggest new features
+
+🤝 Contribute to the project
+
+Your support helps improve the project and encourages future development.
+
+---
+
+## Thank You!
+
+Thank you for checking out **Git-Conflict Arbitrator**.
+
+If this project helped you or inspired you, consider giving it a ⭐ on GitHub!
