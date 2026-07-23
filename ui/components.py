@@ -143,7 +143,7 @@ class UIComponents:
 
     def show_resolved_code(self, result):
 
-        st.subheader("✅ Resolved Code")
+        st.subheader("Resolved Code")
 
         st.code(
             result.resolved_code,
@@ -156,7 +156,7 @@ class UIComponents:
 
     def show_conflict_analysis(self, result):
 
-        st.subheader("⚔️ Conflict Analysis")
+        st.subheader("Conflict Analysis")
 
         st.markdown(
             f"""
@@ -175,7 +175,7 @@ class UIComponents:
 
     def show_security_analysis(self, result):
 
-        st.subheader("🛡️ Security Analysis")
+        st.subheader("Security Analysis")
 
         st.markdown(
             f"""
@@ -194,7 +194,7 @@ class UIComponents:
 
     def show_merge_strategy(self, result):
 
-        st.subheader("🔀 Merge Strategy")
+        st.subheader("Merge Strategy")
 
         st.info(result.merged_strategy)
 
@@ -204,7 +204,7 @@ class UIComponents:
 
     def show_architecture_notes(self, result):
 
-        st.subheader("🏗️ Architectural Notes")
+        st.subheader("Architectural Notes")
 
         st.markdown(
             f"""
@@ -223,7 +223,7 @@ class UIComponents:
 
     def show_risks(self, result):
 
-        st.subheader("⚠️ Risks")
+        st.subheader("Risks")
 
         st.markdown(
             f"""
@@ -252,7 +252,7 @@ class UIComponents:
         elif confidence == "low":
             css_class = "confidence-low"
 
-        st.subheader("📊 Confidence")
+        st.subheader("Confidence")
 
         st.markdown(
             f"""
@@ -292,7 +292,7 @@ class UIComponents:
     def download_code(self, result):
 
         st.download_button(
-            label="📥 Download Resolved Code",
+            label="Download Resolved Code",
             data=result.resolved_code,
             file_name="resolved_code.py",
             mime="text/plain",
@@ -332,7 +332,7 @@ class UIComponents:
 
         st.download_button(
 
-            "📄 Export JSON Report",
+            "Export JSON Report",
 
             data=json.dumps(
                 report,
@@ -365,11 +365,11 @@ class UIComponents:
 
         tabs = st.tabs(
             [
-                "💻 Resolved Code",
-                "⚔️ Conflict",
-                "🛡️ Security",
-                "🏗️ Architecture",
-                "⚠️ Risks",
+                " Resolved Code",
+                " Conflict",
+                " Security",
+                " Architecture",
+                " Risks",
             ]
         )
 
@@ -401,7 +401,7 @@ class UIComponents:
         st.divider()
 
         st.caption(
-            "⚡ Git Conflict Arbitrator • AI-Powered Merge Resolution"
+            " Git Conflict Arbitrator • AI-Powered Merge Resolution"
         )
 
     ####################################################################
